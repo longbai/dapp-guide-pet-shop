@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.10;
 
 import "truffle/Assert.sol";   // 引入的断言
 import "truffle/DeployedAddresses.sol";  // 用来获取被测试合约的地址
@@ -18,7 +18,7 @@ contract TestAdoption {
   // 宠物所有者测试用例
   function testGetAdopterAddressByPetId() public {
     // 期望领养者的地址就是本合约地址，因为交易是由测试合约发起交易，
-    address expected = this;
+    address expected = address(this);
     address adopter = adoption.adopters(8);
     Assert.equal(adopter, expected, "Owner of pet ID 8 should be recorded.");
   }
@@ -26,7 +26,7 @@ contract TestAdoption {
     // 测试所有领养者
   function testGetAdopterAddressByPetIdInArray() public {
   // 领养者的地址就是本合约地址
-    address expected = this;
+    address expected = address(this);
     address[16] memory adopters = adoption.getAdopters();
     Assert.equal(adopters[8], expected, "Owner of pet ID 8 should be recorded.");
   }
